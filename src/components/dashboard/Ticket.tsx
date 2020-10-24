@@ -9,12 +9,26 @@ export interface ITicketProps {
 function Ticket(props: ITicketProps) {
   const { ticket_id, title, description, categories } = props.ticket;
   return (
-    <Box p={5} shadow="md" borderWidth="1px">
-      <Heading fontSize="md">{title}</Heading>
-      <Text mt={2}>{description}</Text>
-      {categories?.map((cat, i) => (
-        <Tag key={i}>{cat}</Tag>
-      ))}
+    <Box
+      p={5}
+      shadow="md"
+      display="flex"
+      justifyContent="space-between"
+      borderWidth="1px"
+      margin="1rem 0"
+      backgroundColor="gray.200"
+    >
+      <Box>
+        <Heading fontSize="md">{title}</Heading>
+        <Text mt={2}>{description}</Text>
+      </Box>
+      <Box>
+        {categories?.map((cat, i) => (
+          <Tag key={i} backgroundColor="blue.200" marginLeft={2}>
+            {cat}
+          </Tag>
+        ))}
+      </Box>
     </Box>
   );
 }
