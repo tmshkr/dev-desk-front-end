@@ -1,13 +1,12 @@
 import React from "react";
-import { Box, Heading, Text, Stack, Tag } from "@chakra-ui/core";
+import { Box, Heading, Text, Tag } from "@chakra-ui/core";
 
 export interface ITicketProps {
   ticket: ITicket;
-  key: number;
 }
 
 function Ticket(props: ITicketProps) {
-  const { ticket_id, title, description, categories } = props.ticket;
+  const { title, description, categories } = props.ticket;
   return (
     <Box
       p={5}

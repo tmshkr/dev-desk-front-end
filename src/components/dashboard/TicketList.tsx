@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text, Stack, Tag } from "@chakra-ui/core";
+import { Box, Heading, Text, Stack } from "@chakra-ui/core";
 
 import Ticket, { ITicket } from "./Ticket";
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 function TicketList(props: Props) {
   const { tickets } = props;
   return (
-    <Stack spacing={8} maxWidth={800} margin="1rem auto">
+    <Stack maxWidth={800} margin="1rem auto">
       {tickets.map((t) => (
         <Ticket key={t.ticket_id} ticket={t} />
       ))}
