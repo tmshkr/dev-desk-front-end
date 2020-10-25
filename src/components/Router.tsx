@@ -5,6 +5,7 @@ import Header from "./Header";
 import PrivateRoute from "./utils/PrivateRoute";
 import AuthForm from "./AuthForm";
 import Dashboard from "./dashboard/Dashboard";
+import CreateTicket from "./dashboard/CreateTicket";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
           <Route path="/login" component={AuthForm} />
           <Route path="/register" component={AuthForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/create-ticket" component={CreateTicket} />
           <Redirect to="/login" />
         </Switch>
       </main>
