@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { Box, Heading, Text, Tag, Spinner } from "@chakra-ui/core";
 import moment from "moment";
 import axios from "axios";
@@ -9,8 +9,10 @@ export interface ITicketProps {
 }
 
 function Ticket(props: ITicketProps) {
+  const [ticket, setTicket] = useState<ITicket | any>();
   const { id } = useParams<any>();
-  const [ticket, setTicket] = useState<ITicket | any>({});
+  const history = useHistory();
+  const isDetailView = !!id;
 
   useEffect(() => {
     if (id) {
@@ -27,8 +29,14 @@ function Ticket(props: ITicketProps) {
     );
   }
 
-  const { title, description, categories, posted_by_name, posted_at } =
-    props.ticket || ticket;
+  const {
+    title,
+    description,
+    categories,
+    posted_by_name,
+    posted_at,
+    ticket_id,
+  } = props.ticket || ticket;
 
   return (
     <Box
@@ -39,6 +47,10 @@ function Ticket(props: ITicketProps) {
       borderWidth="1px"
       margin="1rem 0"
       backgroundColor="gray.200"
+      onClick={
+        isDetailView ? undefined : () => history.push(`/ticket/${ticket_id}`)
+      }
+      cursor={isDetailView ? undefined : "pointer"}
     >
       <Box>
         <Heading fontSize="md">{title}</Heading>
