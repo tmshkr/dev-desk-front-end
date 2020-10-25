@@ -30,12 +30,18 @@ function Ticket(props: ITicketProps) {
         <Text mt={2}>{description}</Text>
         <Text mt={2} fontSize="sm" color="gray.500">
           Posted by {posted_by_name} • 
-          {moment(new Date(posted_at)).format("lll")}
+          {moment(posted_at).format("lll")}
         </Text>
       </Box>
       <Box>
         {categories?.map((cat, i) => (
-          <Tag key={i} backgroundColor="blue.200" margin={1} float="right">
+          <Tag
+            key={i}
+            backgroundColor="blue.200"
+            fontSize={17}
+            margin={1}
+            float="right"
+          >
             {cat}
           </Tag>
         ))}
