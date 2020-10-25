@@ -1,12 +1,20 @@
 import React from "react";
 import { Box, Heading, Text, Tag } from "@chakra-ui/core";
+import moment from "moment";
 
 export interface ITicketProps {
   ticket: ITicket;
 }
 
 function Ticket(props: ITicketProps) {
-  const { title, description, categories } = props.ticket;
+  const {
+    title,
+    description,
+    categories,
+    posted_by_name,
+    posted_at,
+  } = props.ticket;
+
   return (
     <Box
       p={5}
@@ -20,6 +28,10 @@ function Ticket(props: ITicketProps) {
       <Box>
         <Heading fontSize="md">{title}</Heading>
         <Text mt={2}>{description}</Text>
+        <Text mt={2} fontSize="sm" color="gray.500">
+          Posted by {posted_by_name} • 
+          {moment(new Date(posted_at)).format("lll")}
+        </Text>
       </Box>
       <Box>
         {categories?.map((cat, i) => (
