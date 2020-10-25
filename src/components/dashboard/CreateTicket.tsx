@@ -8,10 +8,14 @@ import {
   FormHelperText,
   Checkbox,
   CheckboxGroup,
+  InputLeftElement,
   Button,
   Collapse,
+  Textarea,
   Input,
+  InputGroup,
   Text,
+  Tag,
 } from "@chakra-ui/core";
 
 import axios from "axios";
@@ -27,14 +31,17 @@ const CreateTicket: React.FC<Props> = (props) => {
     errors,
     getValues,
     unregister,
+    watch,
   } = useForm();
 
   const [isLoading, setLoading] = useState(false);
   const [httpError, setHTTPError] = useState("");
+  const [categories, setCategories] = useState(["javascript", "html", "css"]);
 
   const onSubmit = (values: any) => {
     setLoading(true);
     setHTTPError("");
+    console.log(values);
   };
 
   return (
@@ -49,7 +56,52 @@ const CreateTicket: React.FC<Props> = (props) => {
             ref={register({ required: "Please enter a title" })}
           />
           <Text color="#c62828">{errors.title?.message}</Text>
+          <FormLabel htmlFor="title">description</FormLabel>
+          <Textarea
+            id="description"
+            type="description"
+            name="description"
+            ref={register({ required: "Please enter a decription" })}
+          />
+          <Text color="#c62828">{errors.description?.message}</Text>
+          <FormLabel htmlFor="title">what I've tried</FormLabel>
+          <Textarea
+            id="what_ive_tried"
+            type="what_ive_tried"
+            name="what_ive_tried"
+            ref={register({ required: "Please enter a what you've tried" })}
+          />
+          <Text color="#c62828">{errors.what_ive_tried?.message}</Text>
+          <FormLabel htmlFor="title">categories</FormLabel>
+          <Input
+            id="categories"
+            type="categories"
+            name="categories"
+            mb={3}
+            onKeyUp={(e: any) => {
+              if (e.code === "Space") {
+                const newCategories = [...categories, e.target.value.trim()];
+                setCategories(newCategories);
+                e.target.value = "";
+              }
+            }}
+            ref={register()}
+          />
+          {categories.map((cat, i) => (
+            <Tag key={i} backgroundColor="blue.200" margin={1}>
+              {cat}
+            </Tag>
+          ))}
         </FormControl>
+        <Button
+          variantColor="blue"
+          marginTop={3}
+          type="submit"
+          mt={12}
+          isLoading={isLoading}
+        >
+          Submit
+        </Button>
       </form>
     </Box>
   );
