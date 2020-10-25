@@ -1,12 +1,12 @@
-const initialState = {
-  tickets: [],
-};
+import { ActionTypes } from "../actions";
+
+const initialState: any = [];
 
 export const ticketReducer = (state = initialState, action: any) => {
-  const newState = { ...state };
   switch (action.type) {
+    case ActionTypes.SET_TICKETS:
+      return action.payload;
     default:
-      break;
+      return state;
   }
-  return newState;
 };

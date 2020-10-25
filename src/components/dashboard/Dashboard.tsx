@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import axios from "axios";
+import { getTickets } from "../../actions";
 
 import TicketList from "./TicketList";
 
 interface Props extends RouteComponentProps<any> {}
 
 function Dashboard(props: Props) {
-  const [tickets, setTickets] = useState([]);
+  const { tickets } = useSelector((state: any) => state);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios
-      .get("/api/tickets")
-      .then((res) => {
-        console.log(res.data);
-        setTickets(res.data);
-      })
-      .catch((err) => {
-        props.history.push("/login");
-      });
+    dispatch(getTickets());
   }, []);
+
   return <TicketList tickets={tickets} />;
 }
 
