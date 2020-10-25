@@ -44,7 +44,9 @@ const CreateTicket: React.FC<Props> = (props) => {
   const onSubmit = (values: any) => {
     setLoading(true);
     setHTTPError("");
+    values.categories = categories;
     console.log(values);
+    axios.post("/api/tickets", values).then((res) => console.log(res.data));
   };
 
   return (
@@ -88,9 +90,7 @@ const CreateTicket: React.FC<Props> = (props) => {
             type="categories"
             name="categories"
             mb={3}
-            ref={register()}
             onKeyDown={(e: any) => {
-              console.log(e.code);
               if (["Enter", "Space"].includes(e.code)) {
                 e.preventDefault();
                 const cat = e.target.value.trim();
