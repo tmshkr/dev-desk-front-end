@@ -61,7 +61,7 @@ const CreateTicket: React.FC<Props> = (props) => {
             name="title"
             ref={register({ required: "Please enter a title" })}
           />
-          <Text color="#c62828">{errors.title?.message}</Text>
+          <Text color="#c62828">{errors.title?.message || "\xa0"}</Text>
           <FormLabel htmlFor="title">description</FormLabel>
           <Textarea
             id="description"
@@ -69,29 +69,35 @@ const CreateTicket: React.FC<Props> = (props) => {
             name="description"
             ref={register({ required: "Please enter a decription" })}
           />
-          <Text color="#c62828">{errors.description?.message}</Text>
+          <Text color="#c62828">{errors.description?.message || "\xa0"}</Text>
           <FormLabel htmlFor="title">what I've tried</FormLabel>
           <Textarea
             id="what_ive_tried"
             type="what_ive_tried"
             name="what_ive_tried"
-            ref={register({ required: "Please enter a what you've tried" })}
+            ref={register({
+              required: "Please describe the steps you've already tried",
+            })}
           />
-          <Text color="#c62828">{errors.what_ive_tried?.message}</Text>
+          <Text color="#c62828">
+            {errors.what_ive_tried?.message || "\xa0"}
+          </Text>
           <FormLabel htmlFor="title">categories</FormLabel>
           <Input
             id="categories"
             type="categories"
             name="categories"
             mb={3}
-            onKeyUp={(e: any) => {
-              if (e.code === "Space") {
-                const newCategories = [...categories, e.target.value.trim()];
-                setCategories(newCategories);
+            ref={register()}
+            onKeyDown={(e: any) => {
+              console.log(e.code);
+              if (["Enter", "Space"].includes(e.code)) {
+                e.preventDefault();
+                const cat = e.target.value.trim();
+                if (cat) setCategories([...categories, cat]);
                 e.target.value = "";
               }
             }}
-            ref={register()}
           />
           {categories.map((cat, i) => (
             <Tag
@@ -99,15 +105,14 @@ const CreateTicket: React.FC<Props> = (props) => {
               backgroundColor="blue.200"
               margin={1}
               p={"0 0.7rem 0 0.3rem"}
+              cursor="pointer"
+              onClick={() => {
+                const newCategories = [...categories];
+                newCategories.splice(i, 1);
+                setCategories(newCategories);
+              }}
             >
-              <Icon
-                name="small-close"
-                onClick={() => {
-                  const newCategories = [...categories];
-                  newCategories.splice(i, 1);
-                  setCategories(newCategories);
-                }}
-              />
+              <Icon name="small-close" />
 
               {cat}
             </Tag>
