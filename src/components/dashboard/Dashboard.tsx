@@ -12,7 +12,7 @@ function Dashboard(props: Props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTickets());
+    dispatch(getTickets(props.history));
   }, []);
 
   return <TicketList tickets={tickets} />;

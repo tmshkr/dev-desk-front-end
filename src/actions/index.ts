@@ -5,7 +5,7 @@ export enum ActionTypes {
   SET_TICKETS = "SET_TICKETS",
 }
 
-export const getTickets = () => (dispatch: any) => {
+export const getTickets = (history: any) => (dispatch: any) => {
   dispatch({ type: ActionTypes.GET_TICKETS });
 
   axios
@@ -15,6 +15,6 @@ export const getTickets = () => (dispatch: any) => {
     })
     .catch((err) => {
       console.dir(err);
-      // props.history.push("/login");
+      history.push("/login");
     });
 };
