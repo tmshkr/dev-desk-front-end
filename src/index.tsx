@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 import "./axiosConfig";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import reducers from "./reducers";
 import reportWebVitals from "./reportWebVitals";

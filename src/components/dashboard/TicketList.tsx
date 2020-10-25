@@ -9,11 +9,11 @@ interface Props {
 function TicketList(props: Props) {
   const { tickets } = props;
   return (
-    <Stack maxWidth={800} margin="1rem auto">
+    <>
       {tickets.map((t) => (
         <Ticket key={t.ticket_id} ticket={t} />
       ))}
-    </Stack>
+    </>
   );
 }
 
