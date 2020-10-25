@@ -9,17 +9,17 @@ interface Props extends RouteComponentProps<any> {}
 function Dashboard(props: Props) {
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
-    axios.get("/api/tickets	").then((res) => {
-      console.log(res.data);
-      setTickets(res.data);
-    });
+    axios
+      .get("/api/tickets	")
+      .then((res) => {
+        console.log(res.data);
+        setTickets(res.data);
+      })
+      .catch((err) => {
+        props.history.push("/login");
+      });
   }, []);
-  return (
-    <div>
-      Dashboard.tsx
-      <TicketList tickets={tickets} />
-    </div>
-  );
+  return <TicketList tickets={tickets} />;
 }
 
 export default Dashboard;
