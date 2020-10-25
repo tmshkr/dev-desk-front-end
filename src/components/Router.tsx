@@ -17,7 +17,7 @@ function Router() {
           <Route path="/register" component={AuthForm} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/create-ticket" component={CreateTicket} />
-          <Redirect to="/login" />
+          <Redirect to="/dashboard" />
         </Switch>
       </main>
     </BrowserRouter>
