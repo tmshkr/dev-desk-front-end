@@ -10,7 +10,7 @@ function Dashboard(props: Props) {
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     axios
-      .get("/api/tickets	")
+      .get("/api/tickets")
       .then((res) => {
         console.log(res.data);
         setTickets(res.data);
