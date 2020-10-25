@@ -13,9 +13,12 @@ import {
   Collapse,
   Textarea,
   Input,
+  Icon,
   InputGroup,
   Text,
   Tag,
+  Flex,
+  Heading,
 } from "@chakra-ui/core";
 
 import axios from "axios";
@@ -45,7 +48,10 @@ const CreateTicket: React.FC<Props> = (props) => {
   };
 
   return (
-    <Box margin="7rem auto 0" padding={3} maxWidth={500}>
+    <Box margin="3rem auto 0" padding={3} maxWidth={500}>
+      <Heading as="h2" textAlign="center" mb={9}>
+        Create a New Ticket
+      </Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel htmlFor="title">title</FormLabel>
@@ -88,20 +94,35 @@ const CreateTicket: React.FC<Props> = (props) => {
             ref={register()}
           />
           {categories.map((cat, i) => (
-            <Tag key={i} backgroundColor="blue.200" margin={1}>
+            <Tag
+              key={i}
+              backgroundColor="blue.200"
+              margin={1}
+              p={"0 0.7rem 0 0.3rem"}
+            >
+              <Icon
+                name="small-close"
+                onClick={() => {
+                  const newCategories = [...categories];
+                  newCategories.splice(i, 1);
+                  setCategories(newCategories);
+                }}
+              />
+
               {cat}
             </Tag>
           ))}
         </FormControl>
-        <Button
-          variantColor="blue"
-          marginTop={3}
-          type="submit"
-          mt={12}
-          isLoading={isLoading}
-        >
-          Submit
-        </Button>
+        <Flex justifyContent="center">
+          <Button
+            variantColor="blue"
+            type="submit"
+            mt={12}
+            isLoading={isLoading}
+          >
+            Submit
+          </Button>
+        </Flex>
       </form>
     </Box>
   );
