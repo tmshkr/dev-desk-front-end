@@ -23,7 +23,7 @@ function Ticket(props: ITicketProps) {
       </Box>
       <Box>
         {categories?.map((cat, i) => (
-          <Tag key={i} backgroundColor="blue.200" marginLeft={2}>
+          <Tag key={i} backgroundColor="blue.200" margin={1} float="right">
             {cat}
           </Tag>
         ))}
