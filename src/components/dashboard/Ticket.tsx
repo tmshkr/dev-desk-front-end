@@ -1,19 +1,34 @@
-import React from "react";
-import { Box, Heading, Text, Tag } from "@chakra-ui/core";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Box, Heading, Text, Tag, Spinner } from "@chakra-ui/core";
 import moment from "moment";
+import axios from "axios";
 
 export interface ITicketProps {
-  ticket: ITicket;
+  ticket?: ITicket;
 }
 
 function Ticket(props: ITicketProps) {
-  const {
-    title,
-    description,
-    categories,
-    posted_by_name,
-    posted_at,
-  } = props.ticket;
+  const { id } = useParams<any>();
+  const [ticket, setTicket] = useState<ITicket | any>({});
+
+  useEffect(() => {
+    if (id) {
+      axios.get(`/api/tickets/${id}`).then((res) => setTicket(res.data));
+    }
+  }, []);
+
+  if (!(props.ticket || ticket)) {
+    return (
+      <Box textAlign="center" mt="25vh">
+        <Spinner color="blue.500" display="block" m="3rem auto" />
+        <Text>Fetching ticket...</Text>
+      </Box>
+    );
+  }
+
+  const { title, description, categories, posted_by_name, posted_at } =
+    props.ticket || ticket;
 
   return (
     <Box
@@ -34,7 +49,7 @@ function Ticket(props: ITicketProps) {
         </Text>
       </Box>
       <Box>
-        {categories?.map((cat, i) => (
+        {categories?.map((cat: any, i: number) => (
           <Tag
             key={i}
             backgroundColor="blue.200"
