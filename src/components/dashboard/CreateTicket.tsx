@@ -46,7 +46,9 @@ const CreateTicket: React.FC<Props> = (props) => {
     setHTTPError("");
     values.categories = categories;
     console.log(values);
-    axios.post("/api/tickets", values).then((res) => console.log(res.data));
+    axios
+      .post("/api/tickets", values)
+      .then((res) => props.history.push("/dashboard"));
   };
 
   return (
