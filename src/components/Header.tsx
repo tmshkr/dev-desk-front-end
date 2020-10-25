@@ -1,12 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Heading, Text, Tag } from "@chakra-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import { Box, Heading, Button, Text, Tag } from "@chakra-ui/core";
+
+import "./Header.scss";
 
 export interface Props {}
 
 function Header(props: Props) {
+  const history = useHistory();
   return (
-    <Box as="header" p={3} backgroundColor="blue.900" color="white">
+    <Box
+      className="top"
+      as="header"
+      p={3}
+      backgroundColor="blue.900"
+      color="white"
+    >
       <Box
         maxWidth={800}
         margin="auto"
@@ -14,9 +23,18 @@ function Header(props: Props) {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Heading as="h2">DevDesk</Heading>
+        <Heading as="h2">
+          <Link to="/">DevDesk</Link>
+        </Heading>
         <Box as="nav">
-          <Link to="/dashboard">Dashboard</Link>
+          <Button
+            leftIcon="add"
+            variantColor="teal"
+            size="sm"
+            onClick={() => history.push("/create-ticket")}
+          >
+            Create Ticket
+          </Button>
         </Box>
       </Box>
     </Box>
