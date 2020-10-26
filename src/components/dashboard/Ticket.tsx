@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Box, Heading, Text, Tag, Spinner } from "@chakra-ui/core";
 import moment from "moment";
 import axios from "axios";
@@ -61,7 +61,7 @@ function Ticket(props: ITicketProps) {
         </Text>
       </Box>
       <Box>
-        {categories?.map((cat: any, i: number) => (
+        {categories?.map((cat: string, i: number) => (
           <Tag
             key={i}
             backgroundColor="blue.200"
