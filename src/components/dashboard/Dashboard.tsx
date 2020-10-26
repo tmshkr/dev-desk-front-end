@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { getTickets } from "../../actions";
@@ -13,6 +13,7 @@ function Dashboard(props: Props) {
 
   useEffect(() => {
     dispatch(getTickets(props.history));
+    // eslint-disable-next-line
   }, []);
 
   return <TicketList tickets={tickets} />;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Heading, Text, Stack } from "@chakra-ui/core";
 
 import Ticket, { ITicket } from "./Ticket";
 interface Props {

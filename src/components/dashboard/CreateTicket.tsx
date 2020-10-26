@@ -1,20 +1,14 @@
-import React, { useRef, useState } from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
   Box,
   FormControl,
   FormLabel,
-  FormHelperText,
-  Checkbox,
-  CheckboxGroup,
-  InputLeftElement,
   Button,
-  Collapse,
   Textarea,
   Input,
   Icon,
-  InputGroup,
   Text,
   Tag,
   Flex,
@@ -26,16 +20,8 @@ import axios from "axios";
 interface Props extends RouteComponentProps<any> {}
 
 const CreateTicket: React.FC<Props> = (props) => {
-  const { history, location } = props;
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    errors,
-    getValues,
-    unregister,
-    watch,
-  } = useForm();
+  const { history } = props;
+  const { register, handleSubmit, errors } = useForm();
 
   const [isLoading, setLoading] = useState(false);
   const [httpError, setHTTPError] = useState("");
@@ -48,7 +34,11 @@ const CreateTicket: React.FC<Props> = (props) => {
     console.log(values);
     axios
       .post("/api/tickets", values)
-      .then((res) => props.history.push("/dashboard"));
+      .then((res) => history.push("/dashboard"))
+      .catch((err) => {
+        setLoading(false);
+        setHTTPError(err.response.data.message);
+      });
   };
 
   return (
@@ -121,6 +111,7 @@ const CreateTicket: React.FC<Props> = (props) => {
           ))}
         </FormControl>
         <Flex justifyContent="center">
+          <Text color="#c62828">{httpError || "\xa0"}</Text>
           <Button
             variantColor="blue"
             type="submit"

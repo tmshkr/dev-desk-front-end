@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Box, Heading, Button, Text, Tag } from "@chakra-ui/core";
+import { Box, Heading, Button } from "@chakra-ui/core";
 
 import "./Header.scss";
 

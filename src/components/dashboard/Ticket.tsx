@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Heading, Text, Tag, Spinner } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Heading,
+  Icon,
+  Text,
+  Tag,
+  Spinner,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/core";
 import moment from "moment";
 import axios from "axios";
 
@@ -18,7 +30,7 @@ function Ticket(props: ITicketProps) {
     if (id) {
       axios.get(`/api/tickets/${id}`).then((res) => setTicket(res.data));
     }
-  }, []);
+  }, [id]);
 
   if (!(props.ticket || ticket)) {
     return (
@@ -73,6 +85,17 @@ function Ticket(props: ITicketProps) {
           </Tag>
         ))}
       </Box>
+      {isDetailView && (
+        <Menu>
+          <MenuButton as={Button} backgroundColor="green.200">
+            Actions <Icon ml={2} name="chevron-down" />
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Claim</MenuItem>
+            <MenuItem>Resolve</MenuItem>
+          </MenuList>
+        </Menu>
+      )}
     </Box>
   );
 }
